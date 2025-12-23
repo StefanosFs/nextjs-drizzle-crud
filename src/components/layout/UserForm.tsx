@@ -1,6 +1,6 @@
 "use client";
 
-import { createUserAction } from "@/server/actions/userActions";
+import { createUserAction } from "@/server/actions/user-actions";
 import { useState, useTransition } from "react";
 
 export default function UserForm() {
