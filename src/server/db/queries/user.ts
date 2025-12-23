@@ -1,5 +1,5 @@
 // src/lib/user.ts
-import { eq } from "drizzle-orm";
+import { eq, ilike, or } from "drizzle-orm";
 import { db } from "../db";
 import { users } from "../schema/schema";
 
@@ -25,6 +25,21 @@ export const deleteUserById = async (id: string) => {
     .returning();
 };
 
-export const getAllUsers = async () => {
+export const getAllUsers = async (search?: string) => {
+  if (search) {
+    return db
+      .select()
+      .from(users)
+      .where(
+        or(
+          ilike(users.name, `%${search}%`),
+          ilike(users.email, `%${search}%`)
+        )
+      );
+  }
   return db.select().from(users);
 };
+
+// export const getAllUsers = async () => {
+//   return db.select().from(users);
+// };

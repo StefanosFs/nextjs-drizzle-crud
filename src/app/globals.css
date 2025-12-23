@@ -1,80 +1,50 @@
 @import "tailwindcss";
 
 @theme {
-  /* 2. Change it in one place here */
-  --color-text-main: var(--text-main);
   --color-background: var(--background);
-  --color-brand: var(--brand); /* New variable */
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
 }
 
-:root {
-  /* Light Mode: Softer than pure black (Neutral 800) */
-  
-  --text-main: #262626;
-  --background: #ffffff;
-  color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Dark Mode: Clean off-white (Neutral 100) - No blue tint */
-    --text-main: #f3f4f6; 
-    --background: #0a0a0a;
-    --brand: #2563eb; 
-    color-scheme: light;
-  }
-}
-
-/* If you are forcing the .dark class manually */
-.dark {
-  --text-main: #f5f5f5;
-  --brand: #60a5fa; 
-  color-scheme: dark;
-  text-shadow: 0 0 15px rgba(96, 165, 250, 0.3);
-}
-
-/* Global Base Styles */
 @layer base {
   body {
-    @apply bg-background text-text-main antialiased;
+    /* This creates a soft radial glow in the corner */
+    @apply antialiased text-foreground min-h-screen;
+    
+    /* Light Mode Gradient */
+    background: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                #ffffff;
   }
 
-  /* We remove the !important from here so that 
-     specific classes like 'text-brand' can actually work!
-  */
-  h1, h2, h3, h4, h5, h6 {
-    color: inherit; 
+  .dark body {
+    /* Dark Mode "Midnight" Gradient */
+    background-color: #020617;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(124, 58, 237, 0.1) 0px, transparent 50%);
+  }
+
+  @layer base {
+  html, body {
+    /* 1. Keep the text color and height */
+    @apply text-foreground antialiased;
+    min-height: 100vh;
+    
+    /* 2. Instead of @apply bg-background, use your gradient here */
+    background: radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
+                var(--background); /* This uses your fallback color as the base */
+    
+    /* 3. Keep the transition for smooth dark mode switching */
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
-body {
-  color: var(--text-main);
-  background-color: var(--background);
-}
-.container {
-  /* clamp(min, preferred, max) ensures mobile responsiveness */
-  width: clamp(320px, 95%, 900px);
-  margin: 1rem auto;
-  padding: clamp(1rem, 5vw, 2.5rem);
-  background-color: #ffffff;
-  border-radius: 1rem;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 
-              0 8px 10px -6px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-}
-
-/* Responsive typography */
-h1, h2, h3 {
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
-  font-weight: 800;
-  color: #111827;
-  letter-spacing: -0.025em;
-  margin-bottom: 1rem;
-}
-
-p {
-  line-height: 1.6;
-  color: #4b5563;
 }
 
 
