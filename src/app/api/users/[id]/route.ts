@@ -1,7 +1,5 @@
-// src/app/api/users/[id]/route.ts
+import { db } from "@/server/db/db";
 import { NextResponse } from "next/server";
-import db from "@/lib/db";
-import { findUserById } from "@/lib/db";
 
 export const dynamic = "force-dynamic"; // Opts out of static caching
 
@@ -20,7 +18,7 @@ export async function GET(
       );
     }
 
-    const users: Record<string, {id: string, name: string}> = {
+    const users: Record<string, { id: string; name: string }> = {
       "123": { id: "123", name: "Test User" },
       "456": { id: "456", name: "Another User" },
     };
@@ -46,4 +44,3 @@ export async function GET(
     );
   }
 }
-

@@ -1,86 +1,41 @@
-// src/app/page.tsx
-import { getAllUsers, createUser } from "@/lib/user";
+import UserForm from "@/components/layout/UserForm";
+import UserList from "@/components/layout/UserList";
+import { User } from "@/lib/types/user";
+import { getAllUsers } from "@/server/db/queries/user";
 
 export default async function HomePage() {
+  let users: User[] = [];
+
   try {
-    let users = await getAllUsers();
-
-    // Insert a test user if table is empty
-    if (users.length === 0) {
-      await createUser("Alice");
-      users = await getAllUsers(); // refresh after insert
-    }
-
-    return (
-      <main className="p-4">
-        <h1>Users</h1>
-        {users.map((u) => (
-          <div key={u.id}>{u.name}</div>
-        ))}
-      </main>
-    );
-  } catch (err) {
-    console.error("Database error:", err);
-    return <p>Failed to connect to database.</p>;
+    users = await getAllUsers();
+  } catch (error) {
+    console.error("Database error:", error);
   }
+
+  return (
+    <main className="flex-1 p-6 dark:bg-neutral-950">
+      <div className="max-w-6xl mx-auto space-y-8">
+        {/* Page Header */}
+        <div>
+          <h1 className="text-3xl font-semibold text-gray-900 dark:text-white">
+            Users
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
+            Manage application users and view their details
+          </p>
+        </div>
+
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <section className="lg:col-span-1 bg-white dark:bg-neutral-800 rounded-xl shadow p-6">
+            <h2 className="text-lg font-medium mb-4">Add User</h2>
+            <UserForm />
+          </section>
+          <section className="lg:col-span-2 bg-white dark:bg-neutral-800 rounded-xl shadow p-6">
+            <UserList users={users} />
+          </section>
+        </div>
+      </div>
+    </main>
+  );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// src/app/page.tsx
-// import db from "@/lib/db"; // Import your DB helper directly
-
-// export default async function Page() {
-//   // ✅ DO THIS: Call the logic directly from the server
-//   const user = await db.findUserById("789");
-  
-//   return <div>{user.name}</div>;
-// }
-
-
-
-
-
-
-// export default async function Page() {
-//   const res = await fetch('http://localhost:3000/api/users/278');
-//   const user = await res.json();
-
-//   return (
-//     <div>
-//       <h1>Hello</h1>
-//       <pre className="code-block">{JSON.stringify(user, null, 2)}</pre>
-//     </div>
-//   );
-// }
