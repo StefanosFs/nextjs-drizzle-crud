@@ -5,10 +5,6 @@ import { deleteUserAction, updateUserAction } from "@/server/actions/user-action
 import { Button } from "../ui/buttons"
 import { SearchX } from "lucide-react";
 
-// type Props = {
-//   users: User[];
-// };
-
 export default function UserList({ users }: { users: User[] }) {
   if (users.length === 0) {
     return (

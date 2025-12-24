@@ -14,38 +14,54 @@
   body {
     /* This creates a soft radial glow in the corner */
     @apply antialiased text-foreground min-h-screen;
-    
+
     /* Light Mode Gradient */
-    background: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-                radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
-                #ffffff;
+    background: radial-gradient(
+        at 0% 0%,
+        hsla(253, 16%, 7%, 1) 0,
+        transparent 50%
+      ),
+      radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+      #ffffff;
   }
 
   .dark body {
     /* Dark Mode "Midnight" Gradient */
     background-color: #020617;
-    background-image: 
-      radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.15) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(124, 58, 237, 0.1) 0px, transparent 50%);
+    background-image: radial-gradient(
+        at 0% 0%,
+        rgba(79, 70, 229, 0.15) 0px,
+        transparent 50%
+      ),
+      radial-gradient(
+        at 100% 100%,
+        rgba(124, 58, 237, 0.1) 0px,
+        transparent 50%
+      );
   }
 
   @layer base {
-  html, body {
-    /* 1. Keep the text color and height */
-    @apply text-foreground antialiased;
-    min-height: 100vh;
-    
-    /* 2. Instead of @apply bg-background, use your gradient here */
-    background: radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.15) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
-                var(--background); /* This uses your fallback color as the base */
-    
-    /* 3. Keep the transition for smooth dark mode switching */
-    transition: background-color 0.3s ease, color 0.3s ease;
+    html,
+    body {
+      /* 1. Keep the text color and height */
+      @apply text-foreground antialiased;
+      min-height: 100vh;
+
+      /* 2. Instead of @apply bg-background, use your gradient here */
+      background: radial-gradient(
+          at 0% 0%,
+          rgba(79, 70, 229, 0.15) 0px,
+          transparent 50%
+        ),
+        radial-gradient(
+          at 100% 100%,
+          rgba(124, 58, 237, 0.1) 0px,
+          transparent 50%
+        ),
+        var(--background); /* This uses your fallback color as the base */
+
+      /* 3. Keep the transition for smooth dark mode switching */
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
   }
 }
-
-}
-
-
-

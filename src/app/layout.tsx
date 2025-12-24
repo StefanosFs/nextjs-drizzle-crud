@@ -13,12 +13,12 @@ export default function RootLayout({
           <div className="flex min-h-screen">
             <Sidebar />
             <div className="flex flex-1 flex-col">
-              <Header />
-              <main className="flex-1 p-4 md:p-10 bg-neutral-50/50">
+            <Header />
+            <main className="flex-1 p-4 md:p-10 bg-neutral-50/50">
                 <div className="mx-auto max-w-5xl">
                   {children}
                 </div>
-              </main>
+             </main>
             </div>
           </div>
       </body>
