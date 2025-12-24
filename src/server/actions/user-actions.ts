@@ -3,7 +3,7 @@
 import { db } from "@/server/db/db";
 import { users } from "@/server/db/schema";
 import { revalidatePath } from "next/cache";
-import { deleteUserById, updateUserById } from "../db/queries/user";
+import { deleteUserById, updateUserById } from "@/server/db/queries/user";
 
 export async function createUserAction(formData: FormData) {
   const name = formData.get("name") as string;
@@ -16,10 +16,7 @@ export async function createUserAction(formData: FormData) {
   revalidatePath("/");
 }
 
-export async function updateUserAction(
-  id: string,
-  formData: FormData
-) {
+export async function updateUserAction(id: string, formData: FormData) {
   const name = formData.get("name") as string | null;
   const email = formData.get("email") as string | null;
 

@@ -1,4 +1,3 @@
-// src/lib/user.ts
 import { eq, ilike, or } from "drizzle-orm";
 import { db } from "../db";
 import { users } from "../schema/schema";
@@ -40,6 +39,3 @@ export const getAllUsers = async (search?: string) => {
   return db.select().from(users);
 };
 
-// export const getAllUsers = async () => {
-//   return db.select().from(users);
-// };
