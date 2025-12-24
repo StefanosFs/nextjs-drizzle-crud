@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import UserForm from "@/components/layout/UserForm";
 import UserList from "@/components/layout/UserList";
 import { User } from "@/lib/types/user";
